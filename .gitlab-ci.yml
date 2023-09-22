@@ -1,0 +1,28 @@
+stages:
+  - build
+  - deploy
+
+build webproject:
+  stage: build
+  only:
+    refs:
+      - main
+  tags:
+    - main
+  script:
+    - echo "working"
+    - ./mvnw package
+    - docker build -t webproject .
+
+
+deploy webproject:
+  stage: deploy
+  only:
+    refs:
+      - main
+  tags:
+    - main
+  script:
+    - cd /home/ubuntu/webproject
+    - docker-compose down
+    - docker-compose up -d
