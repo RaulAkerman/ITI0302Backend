@@ -3,7 +3,7 @@
 
 # Instructions:
 
-For documentation got to ---> https://gitlab.cs.ttu.ee/kkinks/iti0302/-/wikis/Documentation
+For documentation got to ---> https://github.com/RaulAkerman/ITI0302Backend/wiki/Documentation
 
 To run this project locally start docker-compose.yml file (you must have Docker installed on your pc). After you start the docker launch WebprojectApplication.
 
@@ -12,7 +12,7 @@ The URL for the TalTech server is http://team6.hopto.org (http://193.40.255.16/a
 Running the backend on your pc:
 Make sure you have docker and postgre installed.
 
-1. Clone repo from gitlab (https://gitlab.cs.ttu.ee/kkinks/iti0302)
+1. Clone repo from gitlab (https://github.com/RaulAkerman/ITI0302Backend)
 2. Make sure you have postgre and docker installed
 3. Changing the application.properties might be neccessary(local postgres password, localhost address)
 4. Run WebprojectApplication.java class
