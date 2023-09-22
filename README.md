@@ -18,7 +18,7 @@ Make sure you have docker and postgre installed.
 4. Run WebprojectApplication.java class
 
 Running the frontend on your PC:
-1. Clone repo from gitlab (https://gitlab.cs.ttu.ee/matkii/iti0302-frontend)
+1. Clone repo from gitlab (https://github.com/RaulAkerman/ITI0302FrontEnd)
 2. Using the IDE terminal input the commands:
 	a. npm install
 	b. npm run serve
