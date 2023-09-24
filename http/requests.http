@@ -1,0 +1,108 @@
+POST http://localhost:8080/api/customer/cancelReservation/10/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJ0ZXN0IiwiaWF0IjoxNjY5ODA4Mjg3LCJleHAiOjE2NzA3OTgyODd9.lOz7o0FO22HGUfmZOx2mhyah-D9chJj6HWFOZuIon2A
+
+
+###
+POST http://localhost:8080/api/customer/makeReservation/22/10/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJ0ZXN0IiwiaWF0IjoxNjY5ODA4Mjg3LCJleHAiOjE2NzA3OTgyODd9.lOz7o0FO22HGUfmZOx2mhyah-D9chJj6HWFOZuIon2A
+
+###
+GET http://localhost:8080/api/establishment/getAll/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJ0ZXN0IiwiaWF0IjoxNjY5ODA4Mjg3LCJleHAiOjE2NzA3OTgyODd9.lOz7o0FO22HGUfmZOx2mhyah-D9chJj6HWFOZuIon2A
+
+
+###
+
+POST http://localhost:8080/api/establishment/add/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJ0ZXN0IiwiaWF0IjoxNjY5ODA4Mjg3LCJleHAiOjE2NzA3OTgyODd9.lOz7o0FO22HGUfmZOx2mhyah-D9chJj6HWFOZuIon2A
+
+{
+  "name": "Viru Hotell"
+}
+
+###
+POST http://localhost:8080/api/customer/getAllCustomers?page=0&orderBy=Fname/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJ0ZXN0IiwiaWF0IjoxNjY5ODA4Mjg3LCJleHAiOjE2NzA3OTgyODd9.lOz7o0FO22HGUfmZOx2mhyah-D9chJj6HWFOZuIon2A
+
+
+###
+POST http://localhost:8080/api/customer/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJ0ZXN0IiwiaWF0IjoxNjY5ODA4Mjg3LCJleHAiOjE2NzA3OTgyODd9.lOz7o0FO22HGUfmZOx2mhyah-D9chJj6HWFOZuIon2A
+
+{
+  "Fname":"Doiff",
+  "lastName":"Jhoff",
+  "rankId":2,
+  "reservationId":2,
+  "nrOfVisits":0,
+  "customerNationalId":"888"
+}
+
+###
+
+POST http://localhost:8080/api/reservation/postReservation/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJ0ZXN0IiwiaWF0IjoxNjY5ODEzMTk0LCJleHAiOjE2NzA4MDMxOTR9.Ibr6GSdGxL5jIV6E9FM1g3EgI6VHX5faO9AVDr4gplI
+
+{
+  "establishment": 2,
+  "date": "11.30.2022",
+  "status": "available",
+  "username": "test"
+}
+
+###
+
+POST http://localhost:8080/api/reservation/updateReservation/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJ0ZXN0IiwiaWF0IjoxNjY5ODEzMTk0LCJleHAiOjE2NzA4MDMxOTR9.Ibr6GSdGxL5jIV6E9FM1g3EgI6VHX5faO9AVDr4gplI
+
+{
+  "id": 5,
+  "date": "21.12.2023",
+  "status": "available"
+}
+
+###
+
+GET http://localhost:8080/api/reservations/getAll/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJ0ZXN0IiwiaWF0IjoxNjY5ODEzMTk0LCJleHAiOjE2NzA4MDMxOTR9.Ibr6GSdGxL5jIV6E9FM1g3EgI6VHX5faO9AVDr4gplI
+
+###
+
+POST http://localhost:8080/api/reservation/deleteReservation/1/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJ0ZXN0IiwiaWF0IjoxNjY5ODEzMTk0LCJleHAiOjE2NzA4MDMxOTR9.Ibr6GSdGxL5jIV6E9FM1g3EgI6VHX5faO9AVDr4gplI
+
+###
+
+GET http://localhost:8080/api/reservations/getByStatus/available/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJ0ZXN0IiwiaWF0IjoxNjY5ODEzMTk0LCJleHAiOjE2NzA4MDMxOTR9.Ibr6GSdGxL5jIV6E9FM1g3EgI6VHX5faO9AVDr4gplI
+
+###
+
+GET http://localhost:8080/api/reservations/getByEstablishment/1/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJ0ZXN0IiwiaWF0IjoxNjY5ODEzMTk0LCJleHAiOjE2NzA4MDMxOTR9.Ibr6GSdGxL5jIV6E9FM1g3EgI6VHX5faO9AVDr4gplI
+
+###
+
+GET http://localhost:8080/api/customer/get/25/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJ0ZXN0IiwiaWF0IjoxNjY5ODEzMTk0LCJleHAiOjE2NzA4MDMxOTR9.Ibr6GSdGxL5jIV6E9FM1g3EgI6VHX5faO9AVDr4gplI
+
+###
+
+POST http://localhost:9000/api/customer/getAllCustomers?page=0&orderBy=Fname&lastName=a&order=ASC
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJ0ZXN0IiwiaWF0IjoxNjY5ODEzMTk0LCJleHAiOjE2NzA4MDMxOTR9.Ibr6GSdGxL5jIV6E9FM1g3EgI6VHX5faO9AVDr4gplI
+
+###

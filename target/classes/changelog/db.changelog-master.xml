@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+    <changeSet id="changelog-master" author="Kauri">
+
+        <createTable tableName="customers">
+            <column name="id" type="integer">
+                <constraints nullable="false" primaryKey="true" unique="false"/>
+            </column>
+            <column name="first_name" type="text">
+                <constraints nullable="false" primaryKey="false" unique="false"/>
+            </column>
+            <column name="last_name" type="text">
+                <constraints nullable="false" primaryKey="false" unique="false"/>
+            </column>
+            <column name="rank_id" type="integer">
+                <constraints nullable="false" primaryKey="false" unique="false"/>
+            </column>
+            <column name="reservations" type="text">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+            <column name="nr_of_visits" type="integer">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+            <column name="customer_national_id" type="text">
+                <constraints nullable="false" primaryKey="false" unique="true"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="ranks">
+            <column name="rank_id" type="integer">
+                <constraints nullable="false" primaryKey="true" unique="false"/>
+            </column>
+            <column name="rank" type="text">
+                <constraints nullable="false" primaryKey="false" unique="true"/>
+            </column>
+        </createTable>
+
+        <addAutoIncrement tableName="customers" columnName="id"/>
+        <addAutoIncrement tableName="ranks" columnName="rank_id"/>
+
+        <addForeignKeyConstraint baseTableName="customers"
+                                 baseColumnNames="rank_id"
+                                 constraintName="fk_customer_rank"
+                                 referencedTableName="ranks"
+                                 referencedColumnNames="rank_id"/>
+    </changeSet>
+
+    <changeSet id="changelog-user" author="Kauri">
+
+        <createTable tableName="users">
+            <column name="id" type="integer">
+                <constraints nullable="false" primaryKey="true" unique="false"/>
+            </column>
+            <column name="username" type="text">
+                <constraints nullable="false" primaryKey="false" unique="true"/>
+            </column>
+            <column name="password" type="text">
+                <constraints nullable="false" primaryKey="false" unique="false"/>
+            </column>
+        </createTable>
+
+        <addAutoIncrement tableName="users" columnName="id"/>
+    </changeSet>
+
+    <changeSet id="rank-fix" author="Kauri">
+        <renameColumn tableName="ranks" oldColumnName="rank_id" newColumnName="id"/>
+    </changeSet>
+
+    <changeSet id="reservation-setup" author="Kauri">
+        <modifyDataType tableName="customers" columnName="reservations" newDataType="integer"/>
+        <renameColumn tableName="customers" oldColumnName="reservations" newColumnName="reservation_id"/>
+
+        <createTable tableName="reservation">
+            <column name="id" type="integer">
+                <constraints nullable="false" primaryKey="true" unique="false"/>
+            </column>
+            <column name="reservation" type="text">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+        </createTable>
+
+        <addAutoIncrement tableName="reservation" columnName="id"/>
+
+        <addForeignKeyConstraint baseTableName="customers"
+                                 baseColumnNames="reservation_id"
+                                 constraintName="fk_customer_reservation"
+                                 referencedTableName="reservation"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="reservation-date" author="Kauri">
+        <addColumn tableName="reservation">
+            <column name="date" type="text">
+                <constraints nullable="false" primaryKey="false" unique="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="reservation-status" author="Kauri">
+        <addColumn tableName="reservation">
+            <column name="status" type="text">
+                <constraints nullable="false" primaryKey="false" unique="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="establishments" author="Kauri">
+
+        <modifyDataType tableName="reservation" columnName="reservation" newDataType="integer"/>
+
+        <createTable tableName="establishments">
+            <column name="id" type="integer">
+                <constraints nullable="false" primaryKey="true" unique="false"/>
+            </column>
+            <column name="name" type="text">
+                <constraints nullable="false" primaryKey="false" unique="false"/>
+            </column>
+        </createTable>
+
+        <addAutoIncrement tableName="establishments" columnName="id"/>
+
+        <addForeignKeyConstraint baseTableName="reservation"
+                                 baseColumnNames="reservation"
+                                 constraintName="fk_reservation_establishment"
+                                 referencedTableName="establishments"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="rename" author="Kauri">
+        <renameColumn tableName="reservation" oldColumnName="reservation" newColumnName="establishment"/>
+    </changeSet>
+
+    <changeSet id="rename-tables" author="Kauri">
+        <renameTable oldTableName="establishments" newTableName="establishment"/>
+        <renameTable oldTableName="ranks" newTableName="rank"/>
+    </changeSet>
+
+    <changeSet id="renameRank" author="kauri">
+        <renameColumn tableName="rank" oldColumnName="rank" newColumnName="rank_name"/>
+    </changeSet>
+
+    <changeSet id="establishment-user" author="Kauri">
+        <addColumn tableName="reservation">
+            <column name="username" type="text">
+                <constraints nullable="false" primaryKey="false" unique="false"/>
+            </column>
+        </addColumn>
+
+        <modifyDataType tableName="reservation" columnName="username" newDataType="integer"/>
+
+        <addForeignKeyConstraint baseTableName="reservation" baseColumnNames="username" constraintName="fk_user_reservation" referencedTableName="users"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="establishment-unique" author="Kauri">
+        <addUniqueConstraint tableName="establishment" columnNames="name"/>
+    </changeSet>
+    
+    <changeSet id="re-structure" author="Kauri">
+        <dropForeignKeyConstraint baseTableName="customers" constraintName="fk_customer_reservation"/>
+
+        <dropColumn tableName="customers" columnName="reservation_id"/>
+
+        <addColumn tableName="reservation">
+            <column name="booked_customer" type="integer">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+        </addColumn>
+
+        <addForeignKeyConstraint baseTableName="reservation" baseColumnNames="booked_customer" constraintName="fk_reservation_customer" referencedTableName="customers"
+                                 referencedColumnNames="id"/>
+
+        <renameTable oldTableName="customers" newTableName="customer"/>
+
+    </changeSet>
+
+    <changeSet id="date-expansion" author="Kauri">
+        <addColumn tableName="reservation">
+            <column name="day" type="integer">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+            <column name="month" type="integer">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+            <column name="year" type="integer">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+    <include file="/changelog/db.changelog-master.xml"/>
+
+    <changeSet id="add customer" author="Kauri">
+        <insert tableName="rank">
+            <column name="rank_name" value="NEUTRAL"/>
+        </insert>
+
+        <insert tableName="rank">
+            <column name="rank_name" value="VIP"/>
+        </insert>
+
+        <insert tableName="customer">
+            <column name="id" value="1"/>
+            <column name="first_name" value="John"/>
+            <column name="last_name" value="Doe"/>
+            <column name="rank_id" value="1"/>
+            <column name="nr_of_visits" value="0"/>
+            <column name="customer_national_id" value="5555"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
